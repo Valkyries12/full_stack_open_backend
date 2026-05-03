@@ -1,0 +1,28 @@
+{
+  "name": "full_stack_open_backend",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Valkyries12/full_stack_open_backend#readme",
+  "bugs": {
+    "url": "https://github.com/Valkyries12/full_stack_open_backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Valkyries12/full_stack_open_backend.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
