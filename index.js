@@ -67,6 +67,29 @@ app.delete("/api/persons/:id", (request, response) => {
 })
 
 
+app.post("/api/persons", (request, response) => {
+  const id = Math.floor(Math.random() * 100);
+  const body = request.body;
+
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "Name or number missing"
+    })
+  }
+
+  const newPerson = {
+    "id": id,
+    ...request.body
+  };
+  console.log("La persona a agregar es: ", newPerson);
+  persons = persons.concat(newPerson);
+  console.log("Personas: ", persons);
+
+  response.json();
+
+})
+
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
