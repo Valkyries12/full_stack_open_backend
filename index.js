@@ -73,7 +73,14 @@ app.post("/api/persons", (request, response) => {
 
   if (!body.name || !body.number) {
     return response.status(400).json({
-      error: "Name or number missing"
+      error: "Falta el nombre o el número"
+    })
+  }
+
+  const nameExists = persons.some(person => person.name === body.name);
+  if (nameExists) {
+    return response.status(409).json({
+      error: "El nombre ya existe en la agenda"
     })
   }
 
@@ -88,6 +95,7 @@ app.post("/api/persons", (request, response) => {
   response.json();
 
 })
+
 
 
 const PORT = 3001;
