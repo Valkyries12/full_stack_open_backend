@@ -66,24 +66,22 @@ app.post("/api/persons", (request, response) => {
     })
   }
 
-  const nameExists = persons.some(person => person.name === body.name);
+  /*const nameExists = persons.some(person => person.name === body.name);
   if (nameExists) {
     return response.status(409).json({
       error: "El nombre ya existe en la agenda"
     })
-  }
+  }*/
 
-  const newPerson = {
-    "id": id,
-    ...request.body
-  };
+  const newPerson = new Person({
+    number: body.number,
+    name: body.name
+  });
   console.log("La persona a agregar es: ", newPerson);
-  persons = persons.concat(newPerson);
-  console.log("Personas: ", persons);
-
   
-  response.json(newPerson);
-
+  newPerson.save().then((savedPerson) => {
+    response.json(savedPerson);
+  });
 })
 
 
