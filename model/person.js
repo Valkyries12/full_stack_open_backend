@@ -20,8 +20,16 @@ mongoose
   });
 
 const personSchema = new mongoose.Schema({
-  number: String,
-  name: String,
+  number: {
+    type: String,
+    minLength: [4, "El nombre debe tener al menos 4 caracteres"],
+    required: [true, "El nombre es obligatorio"]
+  },
+  name: {
+    type: String,
+    minLength: [5, "El número es demasiado corto"],
+    required: [true, "El número de teléfono es requerido"]
+  },
 });
 
 personSchema.set('toJSON', {
