@@ -47,12 +47,14 @@ app.get('/api/persons/:id', (request, response) => {
 });
 
 
-app.delete("/api/persons/:id", (request, response) => {
+app.delete("/api/persons/:id", (request, response, next) => {
   const id = parseInt(request.params.id);
-  console.log("id es: ", id)
-  persons = persons.filter(person => person.id !== id)
-  console.log("Persons es: ", persons);
-  response.status(204).end();
+  Person.findByIdAndDelete(request.params.id)
+    .then((result) => {
+      response.status(204).end();
+    })
+    .catch((error) => next(error))
+
 })
 
 
@@ -83,6 +85,18 @@ app.post("/api/persons", (request, response) => {
     response.json(savedPerson);
   });
 })
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message);
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' });
+  }
+
+  next(error);
+};
+
+app.use(errorHandler);
 
 
 
